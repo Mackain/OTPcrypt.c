@@ -1,5 +1,9 @@
-#include <OTPcrypt.h>
+#include "OTPcrypt.h"
 
 int main(){
-    return 0;
+	char str[] = "old value";
+	printf("\n%s\n", str);
+	addSalt(str);
+	printf("\n%s\n", str);
+	return 0;
 }
