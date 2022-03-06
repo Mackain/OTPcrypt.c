@@ -8,9 +8,7 @@
 
 void decrypt(char* decryptionKey, char* input, char* salt);*/
 
-void addSalt(char* unsaltedString){
-    // Might need some code
-};
+void addSalt(char* unsaltedString);
 
 /*void removeSalt(char* saltedString);
 
