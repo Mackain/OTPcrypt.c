@@ -9,7 +9,7 @@
 void decrypt(char* decryptionKey, char* input, char* salt);*/
 
 void addSalt(char* unsaltedString){
-    
+    // Might need some code
 };
 
 /*void removeSalt(char* saltedString);
