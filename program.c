@@ -6,6 +6,8 @@ int main(){
 	addSalt(str);
 	printf("%s\n", str);
 	removeSalt(str);
-	printf("%s\n", str);
+
+	/*print last char in array defined in header file*/
+	printf("%c\n", alpha[62]);
 	return 0;
 }
