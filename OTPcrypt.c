@@ -2,6 +2,14 @@
 #include <string.h>
 #include <stdlib.h>
 
+void encrypt(char* encryptionKey, char* input) {
+
+}
+
+void decrypt(char* decryptionKey, char* input, char* salt) {
+
+}
+
 void addSalt(char* unsaltedString) {
   strcpy(unsaltedString, "lol new  value");
 
