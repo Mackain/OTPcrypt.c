@@ -10,8 +10,8 @@ void decrypt(char* decryptionKey, char* input, char* salt);*/
 
 void addSalt(char* unsaltedString);
 
-/*void removeSalt(char* saltedString);
+void removeSalt(char* saltedString);
 
-void generatePseudoRandomKey(char* key);
+/*void generatePseudoRandomKey(char* key);
 
 void generateKeyFromSeed(char* key, char* seed);*/
