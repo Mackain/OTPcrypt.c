@@ -1,7 +1,7 @@
 #include "OTPcrypt.h"
 
 int main(){
-	char str[] = "old value";
+	char str[20] = "old value";
 	printf("\n%s\n", str);
 	addSalt(str);
 	printf("%s\n", str);

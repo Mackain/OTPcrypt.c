@@ -8,4 +8,3 @@ void addSalt(char* unsaltedString) {
 void removeSalt(char* saltedString) {
   strcpy(saltedString, "lol doesnt work yet");
 }
-  
