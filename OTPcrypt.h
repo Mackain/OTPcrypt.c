@@ -1,8 +1,4 @@
 #pragma once
-#include <stdio.h>
-#include <string.h>
-
-
 #if !defined(OTPCRYPT_H)
 #define OTPCRYPT_H
 
