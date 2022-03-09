@@ -1,13 +1,11 @@
 #include "OTPcrypt.h"
+#include <stdio.h>
 
 int main(){
 	char str[20] = "old value";
 	printf("\n%s\n", str);
 	addSalt(str);
 	printf("%s\n", str);
-	removeSalt(str);
-
-	/*print last char in array defined in header file*/
-	printf("%c\n", alpha[62]);
+	// removeSalt(str);
 	return 0;
 }

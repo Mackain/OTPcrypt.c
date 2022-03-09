@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+
+
+const char alpha[63] = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 void encrypt(char* encryptionKey, char* input) {
 
@@ -13,21 +17,21 @@ void decrypt(char* decryptionKey, char* input, char* salt) {
 void addSalt(char* unsaltedString) {
 	strcpy(unsaltedString, "lol new  value");
 
-	// Totaly unnessessary as usual, but hey, I did malloc and free!
-	size_t len = strlen(unsaltedString);
-
-	char *tempSaltedString = malloc(len + 2);
-	strcpy(tempSaltedString, unsaltedString);
-	tempSaltedString[len] = 'q';
-	tempSaltedString[len + 1] = '\0';
-	strcpy(unsaltedString, tempSaltedString);
-	free(tempSaltedString);
+	// initialize random thingy.
+	srand(time(NULL));
 
 	// time to add some salt! (yum)
-	// add random(ish) char c from the alphabet array tp the end of the input.
+	// add random(ish) char c from the alphabet array to the end of the input.
+	int n = rand() % sizeof alpha;
+	char c = alpha[n];
+	printf("\nwill add %c\n", c);
 
 	// add n number of random(ish) characters at the start of the input.
 	// where n is the index of c in the alphabet array.
+
+	// TODO use malloc to make new string the size of unsaltedString + n + 1
+	// then do all the magic stuff to it
+	// then use strcpy to replace unsaltedString with the new string.
 }
 
 void removeSalt(char* saltedString) {
