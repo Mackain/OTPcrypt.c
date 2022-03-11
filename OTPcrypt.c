@@ -22,7 +22,7 @@ void addSalt(char* unsaltedString) {
 
 	// time to add some salt! (yum)
 	// add random(ish) char c from the alphabet array to the end of the input.
-	int n = rand() % sizeof alpha;
+	int n = rand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
 	printf("\nwill add %c\n", c);
 
@@ -30,6 +30,7 @@ void addSalt(char* unsaltedString) {
 	// where n is the index of c in the alphabet array.
 
 	// TODO use malloc to make new string the size of unsaltedString + n + 1
+	char* saltedStr = (char*) malloc((sizeof unsaltedString / sizeof(unsaltedString[0]) )  + n +1);
 	// then do all the magic stuff to it
 	// then use strcpy to replace unsaltedString with the new string.
 }
