@@ -4,7 +4,7 @@
 #include <time.h>
 
 
-const char alpha[63] = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const char alpha[63] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890";
 
 void encrypt(char* encryptionKey, char* input) {
 
@@ -15,24 +15,34 @@ void decrypt(char* decryptionKey, char* input, char* salt) {
 }
 
 void addSalt(char* unsaltedString) {
-	strcpy(unsaltedString, "lol new  value");
 
 	// initialize random thingy.
 	srand(time(NULL));
 
 	// time to add some salt! (yum)
-	// add random(ish) char c from the alphabet array to the end of the input.
+	// find a random character c to start salting.
 	int n = rand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
-	printf("\nwill add %c\n", c);
 
-	// add n number of random(ish) characters at the start of the input.
-	// where n is the index of c in the alphabet array.
+	int unsaltedSize = sizeof unsaltedString * sizeof(char);
+	int saltedSize = unsaltedSize + n + 1;
+	char* saltedString = (char*) malloc(saltedSize);
 
-	// TODO use malloc to make new string the size of unsaltedString + n + 1
-	char* saltedStr = (char*) malloc((sizeof unsaltedString / sizeof(unsaltedString[0]) )  + n +1);
-	// then do all the magic stuff to it
-	// then use strcpy to replace unsaltedString with the new string.
+	// add n number of random(ish) characters at the start of the string.
+	// where n is the index of c in the alphabet string.
+	int i;
+	char c2;
+	int x;
+	for (i = 0; i < n; i++)
+	{
+		saltedString[i] = alpha[rand() % (sizeof alpha / sizeof(char))];
+	}
+	printf("\n------------------\n%s", saltedString);
+	printf("\n------------------\n");
+	strcat(saltedString, unsaltedString);
+	// add c to the end of the string.
+	saltedString[saltedSize] = c;
+	strcpy(unsaltedString, saltedString);
 }
 
 void removeSalt(char* saltedString) {

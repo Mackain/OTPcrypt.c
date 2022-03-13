@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 int main(){
-	char str[20] = "old value";
+	// this string must always have enough memory for its lenght + the alphabetstrings lenght +1
+	char str[100] = "old value";
 	printf("\n%s\n", str);
 	addSalt(str);
 	printf("%s\n", str);
