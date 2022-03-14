@@ -48,9 +48,13 @@ void addSalt(char* unsaltedString) {
 void removeSalt(char* saltedString) {
 	strcpy(saltedString, "lol doesnt work yet");
 	// time too remove some salt (thats a lot of sodium)
-	// find integer n at the end of the input
+	// find char c at the end of the string.
 
-	//remove n number of characters at the start of the input
+	// calculate n, the index of C in the alphabet string.
+
+	// remove n number of characters at the start of the input
+
+	// remove c from the end of the string.
 
 	// unsalted output may get a lenght of 0 if an invalid c is used... impostor detected!
 	// if so, just return the garbled output and pretend like it works as intended...
