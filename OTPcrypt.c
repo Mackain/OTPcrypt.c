@@ -51,16 +51,20 @@ void removeSalt(char* saltedString) {
 	// calculate n, the index of C in the alphabet string.
 	int i;
 	char* e;
-	printf("\n%s\n", alpha);
 	e = strchr(alpha, c);
-	printf("-----------------------------------\n");
+
 	printf("\n%s\n", e);
-	printf("-----------------------------------\n");
-	// i = (int)(e - alpha);
-	// printf("\n%i\n", i);
+
+	i = e - alpha;
+
+	printf("\n%i\n", i);
 
 	// remove n number of characters at the start of the input
 
+	char* unsaltedString = (char*) malloc(sizeof saltedString * sizeof(char));
+	strcpy( unsaltedString, &saltedString[i]);
+	//printf("\n%s\n", &saltedString[i]);
+	printf("\n%s\n", unsaltedString);
 	// remove c from the end of the string.
 
 	// unsalted output may get a lenght of 0 if an invalid c is used... impostor detected!
