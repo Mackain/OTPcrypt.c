@@ -4,7 +4,7 @@
 #include <time.h>
 
 
-const char alpha[63] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890";
+const char alpha[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890\0";
 
 void encrypt(char* encryptionKey, char* input) {
 
@@ -15,7 +15,6 @@ void decrypt(char* decryptionKey, char* input, char* salt) {
 }
 
 void addSalt(char* unsaltedString) {
-
 	// initialize random thingy.
 	srand(time(NULL));
 
@@ -47,7 +46,7 @@ void removeSalt(char* saltedString) {
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
 	char c = saltedString[(strlen(saltedString)-1)];
-	
+
 	printf("\n%c\n", c);
 	// calculate n, the index of C in the alphabet string.
 	int i;
