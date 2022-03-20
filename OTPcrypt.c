@@ -31,8 +31,6 @@ void addSalt(char* unsaltedString) {
 	// add n number of random(ish) characters at the start of the string.
 	// where n is the index of c in the alphabet string.
 	int i;
-	char c2;
-	int x;
 	for (i = 0; i < n; i++)
 	{
 		saltedString[i] = alpha[rand() % (sizeof alpha / sizeof(char))];
