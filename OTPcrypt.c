@@ -35,8 +35,8 @@ void addSalt(char* unsaltedString) {
 	{
 		saltedString[i] = alpha[rand() % (sizeof alpha / sizeof(char))];
 	}
-	printf("\n------------------\n%s", saltedString);
-	printf("\n------------------\n");
+	//printf("\n------------------\n%s", saltedString);
+	//printf("\n------------------\n");
 	strcat(saltedString, unsaltedString);
 	// add c to the end of the string.
 	saltedString[saltedSize] = c;
@@ -44,11 +44,21 @@ void addSalt(char* unsaltedString) {
 }
 
 void removeSalt(char* saltedString) {
-	strcpy(saltedString, "lol doesnt work yet");
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
-
+	char c = saltedString[(strlen(saltedString)-1)];
+	
+	printf("\n%c\n", c);
 	// calculate n, the index of C in the alphabet string.
+	int i;
+	char* e;
+	printf("\n%s\n", alpha);
+	e = strchr(alpha, c);
+	printf("-----------------------------------\n");
+	printf("\n%s\n", e);
+	printf("-----------------------------------\n");
+	// i = (int)(e - alpha);
+	// printf("\n%i\n", i);
 
 	// remove n number of characters at the start of the input
 

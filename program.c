@@ -4,9 +4,9 @@
 int main(){
 	// this string must always have enough memory for its lenght + the alphabetstrings lenght +1
 	char str[100] = "old value";
-	printf("\n%s\n", str);
+	//printf("\n%s\n", str);
 	addSalt(str);
 	printf("%s\n", str);
-	// removeSalt(str);
+	removeSalt(str);
 	return 0;
 }
