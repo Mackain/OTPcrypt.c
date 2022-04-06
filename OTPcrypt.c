@@ -46,7 +46,7 @@ void removeSalt(char* saltedString) {
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
 	char c = saltedString[(strlen(saltedString)-1)];
-	char* orgStrCpy (char*) malloc(sizeof saltedString * sizeof(char));
+	char* orgStrCpy = (char*) malloc(sizeof saltedString * sizeof(char));
 	strcpy(orgStrCpy, saltedString);
 
 	printf("\n%c\n", c);
