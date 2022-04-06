@@ -46,6 +46,8 @@ void removeSalt(char* saltedString) {
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
 	char c = saltedString[(strlen(saltedString)-1)];
+	char* orgStrCpy (char*) malloc(sizeof saltedString * sizeof(char));
+	strcpy(orgStrCpy, saltedString);
 
 	printf("\n%c\n", c);
 	// calculate n, the index of C in the alphabet string.
@@ -68,5 +70,9 @@ void removeSalt(char* saltedString) {
 	// remove c from the end of the string.
 
 	// unsalted output may get a lenght of 0 if an invalid c is used... impostor detected!
-	// if so, just return the garbled output and pretend like it works as intended...
+	// if so, just return the garbled input and pretend like it works as intended...
+	if(saltedString[0] == '\0')
+	{
+		strcpy(saltedString, orgStrCpy);
+	}
 }
