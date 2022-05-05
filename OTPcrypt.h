@@ -8,6 +8,8 @@ void encrypt(char* encryptionKey, char* input);
 
 void decrypt(char* decryptionKey, char* input, char* salt);
 
+int otpRand();
+
 void addSalt(char* unsaltedString);
 
 void removeSalt(char* saltedString);

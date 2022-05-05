@@ -14,13 +14,22 @@ void decrypt(char* decryptionKey, char* input, char* salt) {
 
 }
 
+int otpRand() {
+	// use this to generate random numbers.
+	// it is not perfect, but this way we only have to refactor in one place in the future :)
+
+	srand(time(NULL));
+	int r = rand();
+	return r;
+}
+
 void addSalt(char* unsaltedString) {
 	// initialize random thingy.
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	// time to add some salt! (yum)
 	// find a random character c to start salting.
-	int n = rand() % (sizeof alpha / sizeof(alpha[0]));
+	int n = otpRand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
 
 	int unsaltedSize = sizeof unsaltedString * sizeof(char);
@@ -32,7 +41,7 @@ void addSalt(char* unsaltedString) {
 	int i;
 	for (i = 0; i < n; i++)
 	{
-		saltedString[i] = alpha[rand() % (sizeof alpha / sizeof(char))];
+		saltedString[i] = alpha[otpRand() % (sizeof alpha / sizeof(char))];
 	}
 	//printf("\n------------------\n%s", saltedString);
 	//printf("\n------------------\n");
@@ -76,3 +85,4 @@ void removeSalt(char* saltedString) {
 		strcpy(saltedString, orgStrCpy);
 	}
 }
+
