@@ -4,7 +4,8 @@
 #include <time.h>
 
 
-const char alpha[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890\0";
+const char alpha[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890\0";
+const int numberOfLetters = 63;
 
 void encrypt(char* encryptionKey, char* input) {
 
@@ -37,9 +38,9 @@ void addSalt(char* unsaltedString) {
 	// find a random character c to start salting.
 	int n = otpRand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
-
-	int unsaltedSize = sizeof unsaltedString * sizeof(char);
-	int saltedSize = unsaltedSize + n + 1;
+	printf("c is now %c (and n is %i)\n", c, n);
+	int unsaltedSize = sizeof unsaltedString;
+	int saltedSize = unsaltedSize + (n * sizeof(char) + (2 * sizeof(char)));
 	char* saltedString = (char*) malloc(saltedSize);
 
 	// add n number of random(ish) characters at the start of the string.
@@ -47,13 +48,17 @@ void addSalt(char* unsaltedString) {
 	int i;
 	for (i = 0; i < n; i++)
 	{
-		saltedString[i] = alpha[otpRand() % (sizeof alpha / sizeof(char))];
+		saltedString[i] = alpha[otpRand() % numberOfLetters];
+		// printf("lol adding: %c on index %i\n", saltedString[i], i);
 	}
+ 	printf("iterator i = %i\n", i);
 	//printf("\n------------------\n%s", saltedString);
 	//printf("\n------------------\n");
 	strcat(saltedString, unsaltedString);
 	// add c to the end of the string.
-	saltedString[saltedSize] = c;
+	int penultimateIndex = saltedSize / sizeof(char) -1;
+	saltedString[penultimateIndex] = c;
+	saltedString[penultimateIndex+1] = '\0';
 	strcpy(unsaltedString, saltedString);
 }
 
