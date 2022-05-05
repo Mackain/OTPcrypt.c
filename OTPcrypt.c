@@ -18,7 +18,13 @@ int otpRand() {
 	// use this to generate random numbers.
 	// it is not perfect, but this way we only have to refactor in one place in the future :)
 
-	srand(time(NULL));
+
+   	time_t t;
+
+	int seed = (unsigned) time(&t) + (unsigned) clock();
+
+	srand(seed);
+
 	int r = rand();
 	return r;
 }
