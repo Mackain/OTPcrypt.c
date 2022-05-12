@@ -38,7 +38,7 @@ void addSalt(char* unsaltedString) {
 	// find a random character c to start salting.
 	int n = otpRand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
-	printf("c is now %c (and n is %i)\n", c, n);
+	//printf("c is now %c (and n is %i)\n", c, n);
 	int unsaltedSize = sizeof unsaltedString;
 	int saltedSize = unsaltedSize + (n * sizeof(char) + (2 * sizeof(char)));
 	char* saltedString = (char*) malloc(saltedSize);
@@ -51,7 +51,7 @@ void addSalt(char* unsaltedString) {
 		saltedString[i] = alpha[otpRand() % numberOfLetters];
 		// printf("lol adding: %c on index %i\n", saltedString[i], i);
 	}
- 	printf("iterator i = %i\n", i);
+ 	//printf("iterator i = %i\n", i);
 	//printf("\n------------------\n%s", saltedString);
 	//printf("\n------------------\n");
 	strcat(saltedString, unsaltedString);
