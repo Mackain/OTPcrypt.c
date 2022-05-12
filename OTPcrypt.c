@@ -69,7 +69,7 @@ void removeSalt(char* saltedString) {
 	char* orgStrCpy = (char*) malloc(sizeof saltedString * sizeof(char));
 	strcpy(orgStrCpy, saltedString);
 
-	printf("\n%c\n", c);
+	printf("THE KEY IS %c\n", c);
 	// calculate n, the index of C in the alphabet string.
 	int i;
 	char* e;
