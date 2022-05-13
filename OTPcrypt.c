@@ -21,8 +21,6 @@ int otpRand()
 {
 	// use this to generate random numbers.
 	// it is not perfect, but this way we only have to refactor in one place in the future :)
-
-
    	time_t t;
 
 	int seed = (unsigned) time(&t) + (unsigned) clock();
@@ -35,14 +33,10 @@ int otpRand()
 
 void addSalt(char* unsaltedString)
 {
-	// initialize random thingy.
-	//srand(time(NULL));
-
 	// time to add some salt! (yum)
 	// find a random character c to start salting.
 	int n = otpRand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
-	//printf("c is now %c (and n is %i)\n", c, n);
 	int unsaltedSize = sizeof unsaltedString;
 	int saltedSize = unsaltedSize + (n * sizeof(char) + (2 * sizeof(char)));
 	char* saltedString = (char*) malloc(saltedSize);
@@ -55,10 +49,8 @@ void addSalt(char* unsaltedString)
 		saltedString[i] = alpha[otpRand() % numberOfLetters];
 		// printf("lol adding: %c on index %i\n", saltedString[i], i);
 	}
- 	//printf("iterator i = %i\n", i);
-	//printf("\n------------------\n%s", saltedString);
-	//printf("\n------------------\n");
 	strcat(saltedString, unsaltedString);
+
 	// add c to the end of the string.
 	int penultimateIndex = saltedSize / sizeof(char) -1;
 	saltedString[penultimateIndex] = c;
@@ -86,19 +78,11 @@ void removeSalt(char* saltedString)
 		}
 	}
 
-	//int i;
-	//char* e;
-	//e = strchr(alpha, c);
-	//printf("\n%s\n", e);
-	//i = e - alpha;
-	printf("\n%i\n", n);
-
-	// remove n number of characters at the start of the input
-	///printf("hahaha the size is %i", (strlen(orgStrCpy)));
+	// remove c from from the end of the string
 	char* unsaltedString = (char*) malloc(strlen(saltedString) * sizeof(char));
 	strncpy(unsaltedString, saltedString, strlen(saltedString)-1);
-	//printf("\n%s\n", &saltedString[n]);
-	// remove c from the end of the string.
+
+	// remove n number of chars from the start of the string.
 	strcpy(saltedString, &unsaltedString[n]);
 	// unsalted output may get a lenght of 0 if an invalid c is used... impostor detected!
 	// if so, just return the garbled input and pretend like it works as intended...
