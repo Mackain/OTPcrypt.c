@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <time.h>
 
 
@@ -23,7 +24,8 @@ int otpRand()
 	// it is not perfect, but this way we only have to refactor in one place in the future :)
    	time_t t;
 
-	int seed = (unsigned) time(&t) + (unsigned) clock();
+	// getpid gets the process ID and getppid gets the parent process ID
+	int seed = (unsigned) time(&t) + (unsigned) clock() + (unsigned) getpid() + (unsigned) getppid() + 414 + 1337;
 
 	srand(seed);
 
