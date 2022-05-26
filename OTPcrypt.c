@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include "OTPcrypt.h"
 
 
 const char alpha[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890\0";
@@ -10,7 +11,40 @@ const int numberOfLetters = 63;
 
 void encrypt(char* encryptionKey, char* input)
 {
+	// input = addSalt(input);
+	// addSalt(input);
+    // var output = "";
+	char* encryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
 
+    // for (var i = 0; i < input.length; ++i) {
+	for (int i = 0; i < strlen(input); i++)
+	{
+	//     // special characters not part of the alphabet array are not encrypted.
+    //     // So to maker sure the rest of the encryption does not break they are simply passed trough to the output unencrypted.
+    //     if (alpha.indexOf(input[i]) == -1) {
+    //         output += input[i];
+		char* pPosition = strchr(alpha, input[i]);
+		if (!pPosition)
+		{
+			encryptedStr[i] = input[i];
+		}
+    //     } else {
+    //         var curKey = keyArray[i%encryptionKey.length];
+    //         var curCharIndex = (alpha.indexOf(input[i]) + alpha.indexOf(curKey))%alpha.length;
+    //         output += alpha[curCharIndex];
+    //     }
+		else
+		{
+			char curKey = encryptionKey[i % strlen(encryptionKey)];
+			char* keyIndex = strchr(alpha, curKey);
+			int curCharIndex = (int)(keyIndex - alpha);
+			char* strIndex = strchr(alpha, input[i]);
+			int curStrIndex = (int)(strIndex - alpha);
+			encryptedStr[i] = alpha[(curCharIndex + curStrIndex) % strlen(alpha)];
+		}
+	}
+	printf("%s\n", encryptedStr);
+    // return output;
 }
 
 void decrypt(char* decryptionKey, char* input, char* salt)
