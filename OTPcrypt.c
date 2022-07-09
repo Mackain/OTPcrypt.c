@@ -127,4 +127,3 @@ void removeSalt(char* saltedString)
 		strcpy(saltedString, orgStrCpy);
 	}
 }
-
