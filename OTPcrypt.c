@@ -11,9 +11,7 @@ const int numberOfLetters = 63;
 
 void encrypt(char* encryptionKey, char* input)
 {
-	addSalt(input);
-	// addSalt(input);
-    // var output = "";
+	//addSalt(input);
 	char* encryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
 
     // for (var i = 0; i < input.length; ++i) {
@@ -28,11 +26,6 @@ void encrypt(char* encryptionKey, char* input)
 		{
 			encryptedStr[i] = input[i];
 		}
-    //     } else {
-    //         var curKey = keyArray[i%encryptionKey.length];
-    //         var curCharIndex = (alpha.indexOf(input[i]) + alpha.indexOf(curKey))%alpha.length;
-    //         output += alpha[curCharIndex];
-    //     }
 		else
 		{
 			char curKey = encryptionKey[i % strlen(encryptionKey)];
@@ -43,14 +36,33 @@ void encrypt(char* encryptionKey, char* input)
 			encryptedStr[i] = alpha[(curCharIndex + curStrIndex) % strlen(alpha)];
 		}
 	}
-	//printf("%s\n", encryptedStr);
-    // return output;
 	strcpy(input, encryptedStr);
 }
 
-void decrypt(char* decryptionKey, char* input, char* salt)
+void decrypt(char* decryptionKey, char* input)
 {
+	printf("heh");
+	char* decryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
+	printf("hah");
+	for (int i = 0; i < strlen(input); i++)
+	{
+		char* pPosition = strchr(alpha, input[i]);
+		if(!pPosition)
+		{
+			decryptedStr[i] = input[i];
+		}
+		else
+		{
+			char curKey = decryptionKey[i % strlen(decryptionKey)];
+			int curCharIndex = strchr(alpha, input[i]) - strchr(alpha, curKey);
+			curCharIndex = curCharIndex < 0 ? curCharIndex + strlen(alpha) : curCharIndex;
+			decryptedStr[i] = alpha[curCharIndex];
+			printf("haha it is %c \n", alpha[curCharIndex]);
+		}
+	}
+	// remove salt here lol
 
+	strcpy(input, decryptedStr);
 }
 
 int otpRand()

@@ -6,7 +6,7 @@
 
 void encrypt(char* encryptionKey, char* input);
 
-void decrypt(char* decryptionKey, char* input, char* salt);
+void decrypt(char* decryptionKey, char* input);
 
 int otpRand();
 
