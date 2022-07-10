@@ -87,7 +87,7 @@ void addSalt(char* unsaltedString)
 	int n = otpRand() % numberOfLetters-1;
 	char c = alpha[n];
 	int unsaltedLen = strlen(unsaltedString);
-	int saltedLen = unsaltedLen + n + 1;
+	int saltedLen = unsaltedLen + n + 2;
 	char* saltedString = (char*) malloc(saltedLen * sizeof(char));
 	//char saltedString[saltedLen+1];
 
@@ -106,9 +106,18 @@ void addSalt(char* unsaltedString)
 	//printf("string is %i\n", unsaltedLen);
 	int penultimateIndex = saltedLen -2;
 	//printf("c is %c\n", c);
-	saltedString[penultimateIndex +1] = c;
+	saltedString[penultimateIndex] = c;
 	//char** unsaltedString = realloc(unsaltedString, saltedLen * sizeof(char));
-	//saltedString[penultimateIndex+2] = '\0';
+	saltedString[penultimateIndex + 1] = '\0';
+
+	if (c == ' ')
+	{
+		printf("AAAAAAAAAAAAAAAAAAA\n");
+	}
+	if (c == '\0')
+	{
+		printf("VE OCH FASA!\n");
+	}
 	strcpy(unsaltedString, saltedString);
 }
 
