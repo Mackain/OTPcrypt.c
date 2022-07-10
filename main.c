@@ -4,11 +4,12 @@
 int main()
 {
 	// this string must always have enough memory for its lenght + the alphabetstrings lenght +1
-	char str[100] = "CD";
+	char str[100] = "A";
 	// addSalt(str);
 	// printf("lol salt was added: %s\n", str);
 	// removeSalt(str);
 	// printf("lol salt was removed: %s\n", str);
-	encrypt("CD", str);
+	encrypt("A", str);
+	printf("%s\n", str);
 	return 0;
 }

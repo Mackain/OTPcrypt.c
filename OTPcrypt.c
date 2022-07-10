@@ -11,7 +11,7 @@ const int numberOfLetters = 63;
 
 void encrypt(char* encryptionKey, char* input)
 {
-	// input = addSalt(input);
+	addSalt(input);
 	// addSalt(input);
     // var output = "";
 	char* encryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
@@ -43,8 +43,9 @@ void encrypt(char* encryptionKey, char* input)
 			encryptedStr[i] = alpha[(curCharIndex + curStrIndex) % strlen(alpha)];
 		}
 	}
-	printf("%s\n", encryptedStr);
+	//printf("%s\n", encryptedStr);
     // return output;
+	strcpy(input, encryptedStr);
 }
 
 void decrypt(char* decryptionKey, char* input, char* salt)
@@ -74,8 +75,10 @@ void addSalt(char* unsaltedString)
 	int n = otpRand() % (sizeof alpha / sizeof(alpha[0]));
 	char c = alpha[n];
 	int unsaltedSize = sizeof unsaltedString;
+	int unsaltedLen = strlen(unsaltedString);
+	int saltedLen = unsaltedLen + n + 1;
 	int saltedSize = unsaltedSize + (n * sizeof(char) + (2 * sizeof(char)));
-	char* saltedString = (char*) malloc(saltedSize);
+	char* saltedString = (char*) malloc((saltedSize +1) * sizeof(char));
 
 	// add n number of random(ish) characters at the start of the string.
 	// where n is the index of c in the alphabet string.
@@ -88,9 +91,11 @@ void addSalt(char* unsaltedString)
 	strcat(saltedString, unsaltedString);
 
 	// add c to the end of the string.
-	int penultimateIndex = saltedSize / sizeof(char) -1;
-	saltedString[penultimateIndex] = c;
-	saltedString[penultimateIndex+1] = '\0';
+	printf("string is %i\n", unsaltedLen);
+	int penultimateIndex = saltedLen -2;
+	printf("c is %c\n", c);
+	saltedString[penultimateIndex +1] = c;
+	//saltedString[penultimateIndex+2] = '\0';
 	strcpy(unsaltedString, saltedString);
 }
 
