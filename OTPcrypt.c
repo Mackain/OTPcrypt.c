@@ -11,7 +11,8 @@ const int numberOfLetters = 63;
 
 void encrypt(char* encryptionKey, char* input)
 {
-	//addSalt(input);
+	addSalt(input);
+	printf("got this back: %s\n", input);
 	char* encryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
 
     // for (var i = 0; i < input.length; ++i) {
@@ -41,9 +42,7 @@ void encrypt(char* encryptionKey, char* input)
 
 void decrypt(char* decryptionKey, char* input)
 {
-	printf("heh");
-	char* decryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
-	printf("hah");
+	char decryptedStr[10000]; //(char*) malloc(sizeof(input) * sizeof(char));
 	for (int i = 0; i < strlen(input); i++)
 	{
 		char* pPosition = strchr(alpha, input[i]);
@@ -57,11 +56,12 @@ void decrypt(char* decryptionKey, char* input)
 			int curCharIndex = strchr(alpha, input[i]) - strchr(alpha, curKey);
 			curCharIndex = curCharIndex < 0 ? curCharIndex + strlen(alpha) : curCharIndex;
 			decryptedStr[i] = alpha[curCharIndex];
-			printf("haha it is %c \n", alpha[curCharIndex]);
+			//printf("haha it is %c \n", alpha[curCharIndex]);
 		}
 	}
 	// remove salt here lol
-
+	removeSalt(decryptedStr);
+	printf("haha it done: %s\n", decryptedStr);
 	strcpy(input, decryptedStr);
 }
 
@@ -84,41 +84,41 @@ void addSalt(char* unsaltedString)
 {
 	// time to add some salt! (yum)
 	// find a random character c to start salting.
-	int n = otpRand() % (sizeof alpha / sizeof(alpha[0]));
+	int n = otpRand() % numberOfLetters-1;
 	char c = alpha[n];
-	int unsaltedSize = sizeof unsaltedString;
 	int unsaltedLen = strlen(unsaltedString);
 	int saltedLen = unsaltedLen + n + 1;
-	int saltedSize = unsaltedSize + (n * sizeof(char) + (2 * sizeof(char)));
-	char* saltedString = (char*) malloc((saltedSize +1) * sizeof(char));
+	char* saltedString = (char*) malloc(saltedLen * sizeof(char));
+	//char saltedString[saltedLen+1];
 
+	//printf("lol\n");
 	// add n number of random(ish) characters at the start of the string.
 	// where n is the index of c in the alphabet string.
 	int i;
 	for (i = 0; i < n; i++)
 	{
-		saltedString[i] = alpha[otpRand() % numberOfLetters];
+		saltedString[i] = alpha[otpRand() % numberOfLetters-1];
 		// printf("lol adding: %c on index %i\n", saltedString[i], i);
 	}
 	strcat(saltedString, unsaltedString);
 
 	// add c to the end of the string.
-	printf("string is %i\n", unsaltedLen);
+	//printf("string is %i\n", unsaltedLen);
 	int penultimateIndex = saltedLen -2;
-	printf("c is %c\n", c);
+	//printf("c is %c\n", c);
 	saltedString[penultimateIndex +1] = c;
+	//char** unsaltedString = realloc(unsaltedString, saltedLen * sizeof(char));
 	//saltedString[penultimateIndex+2] = '\0';
 	strcpy(unsaltedString, saltedString);
 }
 
 void removeSalt(char* saltedString)
 {
-	printf("trololo\n");
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
 	char c = saltedString[(strlen(saltedString)-1)];
-	char* orgStrCpy = malloc(strlen(saltedString) * sizeof(char));
-	strcpy(orgStrCpy, saltedString);
+	//char* orgStrCpy = (char *) malloc(strlen(saltedString) * sizeof(char));
+	//strcpy(orgStrCpy, saltedString);
 
 	printf("THE KEY IS %c\n", c);
 	// calculate n, the index of C in the alphabet string.
@@ -132,15 +132,21 @@ void removeSalt(char* saltedString)
 	}
 
 	// remove c from from the end of the string
-	char* unsaltedString = (char*) malloc(strlen(saltedString) * sizeof(char));
-	strncpy(unsaltedString, saltedString, strlen(saltedString)-1);
+	saltedString[(strlen(saltedString)-1)] = '\0';
+	printf("there is %i much salt here\n", n);
+	strcpy(saltedString, &saltedString[n]);
+	//char unsaltedString[strlen(saltedString)]; //(char*) malloc(strlen(saltedString) * sizeof(char));
+	//memcpy(unsaltedString, saltedString, strlen(saltedString)-1);
+	//strncpy(unsaltedString, saltedString, strlen(saltedString)-1);
 
 	// remove n number of chars from the start of the string.
-	strcpy(saltedString, &unsaltedString[n]);
+	//strcpy(saltedString, &unsaltedString[n]);
+
+
 	// unsalted output may get a lenght of 0 if an invalid c is used... impostor detected!
 	// if so, just return the garbled input and pretend like it works as intended...
-	if(saltedString[0] == '\0')
-	{
-		strcpy(saltedString, orgStrCpy);
-	}
+	//if(saltedString[0] == '\0')
+	//{
+	//	strcpy(saltedString, orgStrCpy);
+	//}
 }
