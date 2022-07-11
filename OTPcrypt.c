@@ -6,7 +6,7 @@
 #include "OTPcrypt.h"
 
 
-const char alpha[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890\0";
+const char *alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890";
 const int numberOfLetters = 63;
 
 void encrypt(char* encryptionKey, char* input)
@@ -80,7 +80,7 @@ int otpRand()
 	return r;
 }
 
-void addSalt(char* unsaltedString)
+char* addSalt(char* unsaltedString)
 {
 	// time to add some salt! (yum)
 	// find a random character c to start salting.
@@ -88,37 +88,39 @@ void addSalt(char* unsaltedString)
 	char c = alpha[n];
 	int unsaltedLen = strlen(unsaltedString);
 	int saltedLen = unsaltedLen + n + 2;
-	char* saltedString = (char*) malloc(saltedLen * sizeof(char));
-	//char saltedString[saltedLen+1];
+	char *saltedString = malloc(saltedLen*sizeof(char)*2); 
+	//char saltedString[100];
 
-	//printf("lol\n");
 	// add n number of random(ish) characters at the start of the string.
 	// where n is the index of c in the alphabet string.
+
+	printf("adding %i much salt\n", n);
+	printf("to a string that is %lu long\n", strlen(saltedString));
+	printf("and %lu bytes big\n", sizeof(saltedString));
+	printf("----------[ S A L T I N G ]-----------\n");
 	int i;
 	for (i = 0; i < n; i++)
 	{
-		saltedString[i] = alpha[otpRand() % numberOfLetters-1];
-		// printf("lol adding: %c on index %i\n", saltedString[i], i);
+		saltedString[i] = alpha[otpRand() % numberOfLetters];
+		printf("%c",saltedString[i]);
 	}
+	printf("\n---------------------------------------\n");
+
 	strcat(saltedString, unsaltedString);
 
-	// add c to the end of the string.
-	//printf("string is %i\n", unsaltedLen);
-	int penultimateIndex = saltedLen -2;
-	//printf("c is %c\n", c);
-	saltedString[penultimateIndex] = c;
-	//char** unsaltedString = realloc(unsaltedString, saltedLen * sizeof(char));
-	saltedString[penultimateIndex + 1] = '\0';
+	//int j;
+	//for (j = 0;  j < unsaltedLen; j++)
+	//{
+	//	saltedString[n+j] = unsaltedString[j];
+	//	printf("%c", unsaltedString[j]);
+	//}
 
-	if (c == ' ')
-	{
-		printf("AAAAAAAAAAAAAAAAAAA\n");
-	}
-	if (c == '\0')
-	{
-		printf("VE OCH FASA!\n");
-	}
-	strcpy(unsaltedString, saltedString);
+	// add c to the end of the string
+	int penultimateIndex = saltedLen -2;
+	saltedString[saltedLen-2] = c;
+	saltedString[saltedLen-1] = '\0';
+
+	return saltedString;
 }
 
 void removeSalt(char* saltedString)
@@ -162,7 +164,7 @@ void removeSalt(char* saltedString)
 
 void fetPrint(char* string)
 {
-	printf("+--------------------------------+\n");
+	printf("+-------------FETPRINT-----------+\n");
 	printf("%s\n", string);
 	printf("+--------------------------------+\n");
 	printf("length: %lu\n", strlen(string));

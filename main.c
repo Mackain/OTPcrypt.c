@@ -5,12 +5,12 @@ int main()
 {
 	// this string must always have enough memory for its lenght + the alphabetstrings lenght +1
 	char* str = " BABUCHKA YAYA \0";
-	fetPrint(str);
-	addSalt(str);
-	printf("lol salt");
-	fetPrint(str);
-	// removeSalt(str);
-	// printf("lol salt was removed: %s\n", str);
+	//fetPrint(str);
+
+	//printf("%i\n",otpRand() % 63);
+
+	//printf("lol salt");
+	fetPrint(addSalt(str));
 
 	//encrypt("BABUCHKA", str);
 	//printf("encrypted and salted: %s\n", str);

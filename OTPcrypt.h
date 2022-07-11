@@ -10,7 +10,7 @@ void decrypt(char* decryptionKey, char* input);
 
 int otpRand();
 
-void addSalt(char* unsaltedString);
+char* addSalt(char* unsaltedString);
 
 void removeSalt(char* saltedString);
 
