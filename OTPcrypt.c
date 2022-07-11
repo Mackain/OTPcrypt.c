@@ -159,3 +159,20 @@ void removeSalt(char* saltedString)
 	//	strcpy(saltedString, orgStrCpy);
 	//}
 }
+
+void fetPrint(char* string)
+{
+	printf("+--------------------------------+\n");
+	printf("%s\n", string);
+	printf("+--------------------------------+\n");
+	printf("length: %lu\n", strlen(string));
+	printf("size: %lu bytes\n", sizeof(string));
+	printf("+--------------------------------+\n");
+	int n = 0;
+	for (n; n<strlen(string); n++)
+	{
+		printf("[%c]", string[n]);
+	}
+	printf("\n");
+	printf("+--------------------------------+\n");
+}
