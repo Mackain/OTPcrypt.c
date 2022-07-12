@@ -9,19 +9,16 @@
 const char *alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890";
 const int numberOfLetters = 63;
 
-void encrypt(char* encryptionKey, char* input)
+char* encrypt(char* encryptionKey, char* input)
 {
-	addSalt(input);
+	input = addSalt(input);
 	printf("got this back: %s\n", input);
 	char* encryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
 
-    // for (var i = 0; i < input.length; ++i) {
 	for (int i = 0; i < strlen(input); i++)
 	{
-	//     // special characters not part of the alphabet array are not encrypted.
-    //     // So to maker sure the rest of the encryption does not break they are simply passed trough to the output unencrypted.
-    //     if (alpha.indexOf(input[i]) == -1) {
-    //         output += input[i];
+		// special characters not part of the alphabet array are not encrypted.
+		// So to maker sure the rest of the encryption does not break they are simply passed trough to the output unencrypted.
 		char* pPosition = strchr(alpha, input[i]);
 		if (!pPosition)
 		{
@@ -37,12 +34,12 @@ void encrypt(char* encryptionKey, char* input)
 			encryptedStr[i] = alpha[(curCharIndex + curStrIndex) % strlen(alpha)];
 		}
 	}
-	strcpy(input, encryptedStr);
+	return  encryptedStr;
 }
 
-void decrypt(char* decryptionKey, char* input)
+char* decrypt(char* decryptionKey, char* input)
 {
-	char decryptedStr[10000]; //(char*) malloc(sizeof(input) * sizeof(char));
+	char* decryptedStr = (char*) malloc(strlen(input) * sizeof(char));
 	for (int i = 0; i < strlen(input); i++)
 	{
 		char* pPosition = strchr(alpha, input[i]);
@@ -56,13 +53,11 @@ void decrypt(char* decryptionKey, char* input)
 			int curCharIndex = strchr(alpha, input[i]) - strchr(alpha, curKey);
 			curCharIndex = curCharIndex < 0 ? curCharIndex + strlen(alpha) : curCharIndex;
 			decryptedStr[i] = alpha[curCharIndex];
-			//printf("haha it is %c \n", alpha[curCharIndex]);
 		}
 	}
 	// remove salt here lol
-	removeSalt(decryptedStr);
-	printf("haha it done: %s\n", decryptedStr);
-	strcpy(input, decryptedStr);
+	decryptedStr = removeSalt(decryptedStr);
+	return decryptedStr;
 }
 
 int otpRand()
