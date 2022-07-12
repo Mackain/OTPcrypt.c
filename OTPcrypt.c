@@ -88,42 +88,26 @@ char* addSalt(char* unsaltedString)
 	char c = alpha[n];
 	int unsaltedLen = strlen(unsaltedString);
 	int saltedLen = unsaltedLen + n + 2;
-	char *saltedString = malloc(saltedLen*sizeof(char)*2); 
-	//char saltedString[100];
+	char *saltedString = malloc(saltedLen*sizeof(char)); 
 
 	// add n number of random(ish) characters at the start of the string.
 	// where n is the index of c in the alphabet string.
-
-	printf("adding %i much salt\n", n);
-	printf("to a string that is %lu long\n", strlen(saltedString));
-	printf("and %lu bytes big\n", sizeof(saltedString));
-	printf("----------[ S A L T I N G ]-----------\n");
 	int i;
 	for (i = 0; i < n; i++)
 	{
 		saltedString[i] = alpha[otpRand() % numberOfLetters];
-		printf("%c",saltedString[i]);
 	}
-	printf("\n---------------------------------------\n");
 
 	strcat(saltedString, unsaltedString);
-
-	//int j;
-	//for (j = 0;  j < unsaltedLen; j++)
-	//{
-	//	saltedString[n+j] = unsaltedString[j];
-	//	printf("%c", unsaltedString[j]);
-	//}
 
 	// add c to the end of the string
 	int penultimateIndex = saltedLen -2;
 	saltedString[saltedLen-2] = c;
 	saltedString[saltedLen-1] = '\0';
-
 	return saltedString;
 }
 
-void removeSalt(char* saltedString)
+char* removeSalt(char* saltedString)
 {
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
@@ -145,7 +129,10 @@ void removeSalt(char* saltedString)
 	// remove c from from the end of the string
 	saltedString[(strlen(saltedString)-1)] = '\0';
 	printf("there is %i much salt here\n", n);
-	strcpy(saltedString, &saltedString[n]);
+
+	//strcpy(saltedString, &saltedString[n]);
+	return &saltedString[n];
+
 	//char unsaltedString[strlen(saltedString)]; //(char*) malloc(strlen(saltedString) * sizeof(char));
 	//memcpy(unsaltedString, saltedString, strlen(saltedString)-1);
 	//strncpy(unsaltedString, saltedString, strlen(saltedString)-1);

@@ -4,14 +4,13 @@
 int main()
 {
 	// this string must always have enough memory for its lenght + the alphabetstrings lenght +1
-	char* str = " BABUCHKA YAYA \0";
-	//fetPrint(str);
+	char* str = " BABUCHKA YAYA ";
 
-	//printf("%i\n",otpRand() % 63);
+	str = addSalt(str);
+	fetPrint(str);
 
-	//printf("lol salt");
-	fetPrint(addSalt(str));
-
+	str = removeSalt(str);
+	fetPrint(str);
 	//encrypt("BABUCHKA", str);
 	//printf("encrypted and salted: %s\n", str);
 	//printf("lol");

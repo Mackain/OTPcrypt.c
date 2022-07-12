@@ -12,7 +12,7 @@ int otpRand();
 
 char* addSalt(char* unsaltedString);
 
-void removeSalt(char* saltedString);
+char* removeSalt(char* saltedString);
 
 void fetPrint(char* string);
 
