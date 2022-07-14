@@ -39,7 +39,9 @@ char* encrypt(char* encryptionKey, char* input)
 
 char* decrypt(char* decryptionKey, char* input)
 {
+	printf("1");
 	char* decryptedStr = (char*) malloc(strlen(input) * sizeof(char));
+	printf("2");
 	for (int i = 0; i < strlen(input); i++)
 	{
 		char* pPosition = strchr(alpha, input[i]);
@@ -49,12 +51,15 @@ char* decrypt(char* decryptionKey, char* input)
 		}
 		else
 		{
+			printf("3");
 			char curKey = decryptionKey[i % strlen(decryptionKey)];
 			int curCharIndex = strchr(alpha, input[i]) - strchr(alpha, curKey);
 			curCharIndex = curCharIndex < 0 ? curCharIndex + strlen(alpha) : curCharIndex;
 			decryptedStr[i] = alpha[curCharIndex];
+			printf("4");
 		}
 	}
+	printf("5\n");
 	// remove salt here lol
 	decryptedStr = removeSalt(decryptedStr);
 	return decryptedStr;
