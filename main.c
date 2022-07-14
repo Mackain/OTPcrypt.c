@@ -1,5 +1,7 @@
 #include "OTPcrypt.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main()
 {
@@ -14,9 +16,11 @@ int main()
 	//
 	str = encrypt("BABUCHKA", str);
 	printf("A\n");
-	str = decrypt("BABUCHKA", str);
+	char* str2 = (char*) malloc(strlen(str) * sizeof(char));
+	sprintf(str2, "%s", str);
+	str2 = decrypt("BABUCHKA", str2);
 	printf("B\n");
-	fetPrint(str);
+	fetPrint(str2);
 	//printf("encrypted and salted: %s\n", str);
 	//printf("lol");
 	//decrypt("BABUCHKA", str);
