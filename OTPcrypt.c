@@ -107,10 +107,7 @@ char* removeSalt(char* saltedString)
 	// time too remove some salt (thats a lot of sodium)
 	// find char c at the end of the string.
 	char c = saltedString[(strlen(saltedString)-1)];
-	//char* orgStrCpy = (char *) malloc(strlen(saltedString) * sizeof(char));
-	//strcpy(orgStrCpy, saltedString);
 
-	printf("THE KEY IS %c\n", c);
 	// calculate n, the index of C in the alphabet string.
 	int n = 0;
 	for (n; n < numberOfLetters; n++)
@@ -121,27 +118,8 @@ char* removeSalt(char* saltedString)
 		}
 	}
 
-	// remove c from from the end of the string
 	saltedString[(strlen(saltedString)-1)] = '\0';
-	printf("there is %i much salt here\n", n);
-
-	//strcpy(saltedString, &saltedString[n]);
 	return &saltedString[n];
-
-	//char unsaltedString[strlen(saltedString)]; //(char*) malloc(strlen(saltedString) * sizeof(char));
-	//memcpy(unsaltedString, saltedString, strlen(saltedString)-1);
-	//strncpy(unsaltedString, saltedString, strlen(saltedString)-1);
-
-	// remove n number of chars from the start of the string.
-	//strcpy(saltedString, &unsaltedString[n]);
-
-
-	// unsalted output may get a lenght of 0 if an invalid c is used... impostor detected!
-	// if so, just return the garbled input and pretend like it works as intended...
-	//if(saltedString[0] == '\0')
-	//{
-	//	strcpy(saltedString, orgStrCpy);
-	//}
 }
 
 void fetPrint(char* string)
