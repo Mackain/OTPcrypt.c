@@ -7,20 +7,20 @@ int main(int argc, char **argv)
 {
 
 	// if arg1 == -e ? encryp : decrypt
+	if (strcmp(argv[1], "-e") == 0)
+	{
+		printf("%s\n", encrypt(argv[2], argv[3]));
+	}
 
-
-	// this string must always have enough memory for its lenght + the alphabetstrings lenght +1
-	char* str = " BABUCHKA YAYA ";
-	str = decrypt("BABUCHKA", str);
-	printf("A\n");
-
-
-
-	//char* str2 = (char*) malloc(strlen(str) * sizeof(char));
-	//sprintf(str2, "%s", str);
-	//str2 = decrypt("BABUCHKA", str2);
-	//printf("B\n");
-	//fetPrint(str2);
+	else if (strcmp(argv[1], "-d") == 0)
+	{
+		printf("%s\n", decrypt(argv[2], argv[3]));
+	}
+	else
+	{
+		printf("Invalid syntax\n");
+		return 1;
+	}
 
 	return 0;
 }
