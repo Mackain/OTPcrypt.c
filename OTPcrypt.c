@@ -11,10 +11,9 @@ const int numberOfLetters = 63;
 
 char* encrypt(char* encryptionKey, char* input)
 {
+	// largest possible salted string is input + whole alpha string + c (1)
+	char* encryptedStr = (char*) malloc(sizeof(input) + numberOfLetters + 1 * sizeof(char));
 	input = addSalt(input);
-	printf("got this back: %s\n", input);
-	char* encryptedStr = (char*) malloc(sizeof(input) * sizeof(char));
-
 	for (int i = 0; i < strlen(input); i++)
 	{
 		// special characters not part of the alphabet array are not encrypted.
@@ -55,7 +54,6 @@ char* decrypt(char* decryptionKey, char* input)
 			decryptedStr[i] = alpha[curCharIndex];
 		}
 	}
-	// remove salt here lol
 	decryptedStr = removeSalt(decryptedStr);
 	return decryptedStr;
 }
@@ -120,21 +118,4 @@ char* removeSalt(char* saltedString)
 
 	saltedString[(strlen(saltedString)-1)] = '\0';
 	return &saltedString[n];
-}
-
-void fetPrint(char* string)
-{
-	printf("+-------------FETPRINT-----------+\n");
-	printf("%s\n", string);
-	printf("+--------------------------------+\n");
-	printf("length: %lu\n", strlen(string));
-	printf("size: %lu bytes\n", sizeof(string));
-	printf("+--------------------------------+\n");
-	int n = 0;
-	for (n; n<strlen(string); n++)
-	{
-		printf("[%c]", string[n]);
-	}
-	printf("\n");
-	printf("+--------------------------------+\n");
 }

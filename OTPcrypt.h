@@ -14,6 +14,4 @@ char* addSalt(char* unsaltedString);
 
 char* removeSalt(char* saltedString);
 
-void fetPrint(char* string);
-
 #endif
