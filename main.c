@@ -7,6 +7,16 @@ int main(int argc, char **argv)
 {
 
 	// if arg1 == -e ? encryp : decrypt
+	if (argc < 4)
+	{
+		printf("Too few arguments\n");
+		return 1;
+	}
+	if (argc > 4)
+	{
+		printf("Too many arguments\n");
+		return 1;
+	}
 	if (strcmp(argv[1], "-e") == 0)
 	{
 		printf("%s\n", encrypt(argv[2], argv[3]));
