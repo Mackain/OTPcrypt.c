@@ -12,7 +12,7 @@ const int numberOfLetters = 63;
 char* encrypt(char* encryptionKey, char* input)
 {
 	// largest possible salted string is input + whole alpha string + c (1)
-	char* encryptedStr = (char*) malloc(sizeof(input) + numberOfLetters + 1 * sizeof(char));
+	char* encryptedStr = (char*) malloc((strlen(input) + numberOfLetters + 1) * sizeof(char));
 	input = addSalt(input);
 	for (int i = 0; i < strlen(input); i++)
 	{
